@@ -2,11 +2,28 @@ import React from 'react';
 import './App.css';
 
 function App() {
-  return (
+    const [state, toggleState] = React.useState({ lighton: true });
+
+    function toggleClick(e){
+
+        let value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+        if ( typeof state[e.target.name] === "boolean"  ) {
+            value = !state[e.target.name];
+        }
+        toggleState( {...state, [e.target.name]: value } );
+    }
+
+    return (
     <div>
-      Schrijf hier jouw functie-component!
+        <button
+            type="button"
+            name="lighton"
+            onClick={ toggleClick }
+        >
+        {state.lighton ? 'AAN' : 'UIT'}
+        </button>
     </div>
-  );
+    );
 }
 
 export default App;
